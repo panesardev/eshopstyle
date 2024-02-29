@@ -1,0 +1,61 @@
+import { Component, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { computedAsync } from 'ngxtension/computed-async';
+import { BRAND } from '../app.constants';
+import { ModalService } from '../services/modal.service';
+import { CartModalComponent } from './modals/cart-modal.component';
+import { NavModalComponent } from './modals/nav-modal.component';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+  ],
+  template: `
+    <header class="fixed top-0 left-0 right-0 z-10 max-w-[1920px] mx-auto bg-base-200">
+      <nav class="grid grid-cols-2 md:grid-cols-3 items-center gap-4 md:gap-8 p-4 md:p-8">
+        <div class="flex items-center gap-4">
+          <span class="block md:hidden text-xl" (click)="openNavModal()">
+            <i class="fa-solid fa-bars-staggered"></i>
+          </span>
+          <a routerLink="/" class="lobster text-2xl">{{ brand }}</a>
+        </div>
+        <div class="hidden md:flex justify-center gap-6 md:gap-8 text-lg">
+          <a class="hover:underline" routerLinkActive="text-primary" routerLink="/products">Products</a>
+          <a class="hover:underline" routerLinkActive="text-primary" routerLink="/about">About</a>
+          <a class="hover:underline" routerLinkActive="text-primary" routerLink="/checkout">Checkout</a>
+          <a class="hover:underline" routerLinkActive="text-primary" routerLink="/login">Login</a>
+        </div>
+        <div class="flex justify-end gap-4 md:gap-8 text-2xl">
+          <a class="flex items-center gap-1 cursor-pointer" (click)="openCartModal()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="bg-primary text-sm text-white rounded-full px-1">{{ cartQuantity() }}</span>
+          </a>
+          <a routerLink="/profile">
+            <i class="fa-solid fa-circle-user"></i>
+          </a>
+        </div>
+      </nav>
+    </header>
+  `,
+})
+export class NavbarComponent {
+  private modal = inject(ModalService);
+  private store = inject(Store);
+
+  cartQuantity = computedAsync(() => this.store.select(state => state.cart.quantity));
+
+  brand = BRAND;
+
+  openNavModal(): void {
+    this.modal.open(NavModalComponent);
+  }
+
+  openCartModal(): void {
+    this.modal.open(CartModalComponent);
+  }
+
+}

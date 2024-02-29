@@ -1,0 +1,36 @@
+@if (products(); as products) {
+  <section>
+    <h1 class="text-5xl md:text-7xl text-primary font-bold mb-4">New Arrivals</h1>
+    <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
+  
+    <div class="grid md:grid-cols-[1fr_4fr_1fr] gap-8">
+      <div></div>
+      <div>
+        <h1 class="text-lg mb-8">Showing {{ products.length }} results</h1>
+  
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          @for (product of products; track product.id) {
+            <div class="bg-white grid gap-4 md:gap-6 h-fit p-4 md:p-6">
+              <div routerLink="/products/{{ product.id }}" class="cursor-pointer">
+                <img [src]="product.photoURL" [alt]="product.name">
+              </div>
+              <h1 class="text-lg font-bold">{{ product.name }}</h1>
+              <p class="truncate">{{ product.description }}</p>
+              <div class="flex items-center gap-4 h-8">
+                <div class="text-sm md:text-lg font-bold grid content-center bg-base-200 px-2 md:px-4 h-full rounded-full">$ {{ product.price }}</div>
+                <div class="text-sm md:text-lg bg-slate-200 hover:bg-base-300 grid content-center px-2 md:px-4 h-full rounded-full cursor-pointer transition-all" (click)="addToCart(product)">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}
+@else {
+  <div class="flex justify-center items-center h-96">
+    <div class="loading"></div>
+  </div>
+}
