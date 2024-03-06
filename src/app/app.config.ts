@@ -9,6 +9,7 @@ import { NgxsModule } from "@ngxs/store";
 import { FIREBASE_CONFIG } from './app.constants';
 import { routes } from './app.routes';
 import { CartState } from "./store/cart/cart.state";
+import { ProductsState } from './store/products/products.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
       provideFirestore(() => getFirestore()),
       provideAuth(() => getAuth()),
-      NgxsModule.forRoot([CartState]),
+      NgxsModule.forRoot([CartState, ProductsState]),
     ),
   ]
 };

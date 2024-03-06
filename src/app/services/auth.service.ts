@@ -9,7 +9,6 @@ import { User, UserData, newUserData } from '../types/user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   private firestore = inject(Firestore);
   private auth = inject(Auth);
   private router = inject(Router);
@@ -22,10 +21,8 @@ export class AuthService {
   readonly isAuthenticated$ = this.user$.pipe(
     map(user => !!user),
     tap(exists => {
-      if (!exists) {
-        this.router.navigateByUrl('/login');
-        this.toast.info('You need to be logged in!');
-      }
+      !exists && this.router.navigateByUrl('/login');
+      !exists && this.toast.info('You need to be logged in!');
     }),
   );
 

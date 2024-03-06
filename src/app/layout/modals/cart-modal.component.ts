@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { computedAsync } from 'ngxtension/computed-async';
-import { Cart } from '../../types/cart.interface';
+import { CartStateType } from '../../types/cart.interface';
 import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base-modal.component';
 import { RouterLink } from '@angular/router';
@@ -67,7 +67,7 @@ import { Product } from '../../types/product.interface';
 export class CartModalComponent extends Modal {
   private store = inject(Store);
 
-  cart = computedAsync(() => this.store.select<Cart>(state => state.cart));
+  cart = computedAsync(() => this.store.select<CartStateType>(state => state.cart));
 
   removeProduct(product: Product) {
     this.store.dispatch(new RemoveProduct(product));

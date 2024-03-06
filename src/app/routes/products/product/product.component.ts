@@ -19,12 +19,7 @@ export default class ProductComponent {
   id = input.required<string>();
 
   product = computedAsync(() => this.productsService.find(this.id()));
-  productCategoryName = computedAsync(() => 
-    this.productsService.categories$.pipe(
-      map(categories => categories.find(c => c.id === this.product().categoryId).name),
-    )
-  );
-
+  
   addToCart(product: Product): void {
     this.store.dispatch(new AddProduct(product));
   }

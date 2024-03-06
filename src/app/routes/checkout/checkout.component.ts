@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { computedAsync } from 'ngxtension/computed-async';
-import { Cart } from '../../types/cart.interface';
+import { CartStateType } from '../../types/cart.interface';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Product } from '../../types/product.interface';
@@ -20,7 +20,7 @@ export default class CheckoutComponent {
   private store = inject(Store);
   private auth = inject(AuthService);
 
-  cart = computedAsync(() => this.store.select<Cart>(state => state.cart));
+  cart = computedAsync(() => this.store.select<CartStateType>(state => state.cart));
   user = computedAsync(() => this.auth.user$);
 
   TAX = TAX;
