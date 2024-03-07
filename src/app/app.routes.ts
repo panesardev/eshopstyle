@@ -9,11 +9,6 @@ export const routes: Routes = [
     component: IndexComponent,
     title: titleResolver,
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/checkout',
-  //   pathMatch: 'full',
-  // },
   {
     path: 'about',
     loadComponent: () => import('./routes/about/about.component'),
@@ -51,13 +46,13 @@ export const routes: Routes = [
     title: titleResolver,
   },
   {
-    path: 'place-order',
-    loadComponent: () => import('./routes/place-order/place-order.component'),
+    path: '404',
+    loadComponent: () => import('./routes/not-found/not-found.component'),
     title: titleResolver,
   },
   {
     path: '**',
-    loadComponent: () => import('./routes/not-found/not-found.component'),
-    title: titleResolver,
+    redirectTo: '/404',
+    pathMatch: 'full',
   },
 ];

@@ -3,46 +3,30 @@
     <h1 class="text-5xl md:text-7xl text-primary font-bold mb-4">New Arrivals</h1>
     <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
   
-    <div class="grid md:grid-cols-[1fr_4fr_1fr] gap-8">
+    <div class="grid md:grid-cols-[1fr_5fr] gap-8">
       <div  class="md:sticky md:top-32 grid gap-4 h-fit">
         <h1 class="font-bold text-2xl">Categories</h1>
 
         <div class="grid">
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setCategoryFilter('NONE')">Show all</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setCategoryFilter('MEN')">Men</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setCategoryFilter('WOMEN')">Women</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setCategoryFilter('JEWELRY')">Jewelry</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setCategoryFilter('ELECTRONICS')">Electronics</span>
+          <span class="filter {{ isActiveCategoryFilter('NONE') && 'active' }}" (click)="setCategoryFilter('NONE')">Show all</span>
+          <span class="filter {{ isActiveCategoryFilter('MEN') && 'active' }}" (click)="setCategoryFilter('MEN')">Men</span>
+          <span class="filter {{ isActiveCategoryFilter('WOMEN') && 'active' }}" (click)="setCategoryFilter('WOMEN')">Women</span>
+          <span class="filter {{ isActiveCategoryFilter('JEWELRY') && 'active' }}" (click)="setCategoryFilter('JEWELRY')">Jewelry</span>
+          <span class="filter {{ isActiveCategoryFilter('ELECTRONICS') && 'active' }}" (click)="setCategoryFilter('ELECTRONICS')">Electronics</span>
         </div>
 
-        <h1 class="font-bold text-2xl">Filters</h1>
+        <h1 class="font-bold text-2xl">Filter</h1>
   
         <div class="grid">
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setPriceFilter('NONE')">Price: Default</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setPriceFilter('HIGH_TO_LOW')">Price: High To Low</span>
-          <span class="hover:bg-base-100 border-l-4 border-base-200 hover:border-l-primary py-2 hover:pl-4 transition-all cursor-pointer" (click)="setPriceFilter('LOW_TO_HIGH')">Price: Low To High</span>
+          <span class="filter {{ isActivePriceFilter('NONE') && 'active' }}" (click)="setPriceFilter('NONE')">Price: Default</span>
+          <span class="filter {{ isActivePriceFilter('HIGH_TO_LOW') && 'active' }}" (click)="setPriceFilter('HIGH_TO_LOW')">Price: High To Low</span>
+          <span class="filter {{ isActivePriceFilter('LOW_TO_HIGH') && 'active' }}" (click)="setPriceFilter('LOW_TO_HIGH')">Price: Low To High</span>
         </div>
       </div>
       <div>
-        <h1 class="text-lg text-center mb-8">Showing {{ state.products.length }} results</h1>
+        <h1 class="text-lg font-bold mb-8">Showing {{ state.products.length }} results</h1>
   
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          @for (product of state.products; track product.id) {
-            <div class="bg-white grid gap-4 md:gap-6 h-fit p-4 md:p-6">
-              <div routerLink="/products/{{ product.id }}" class="cursor-pointer">
-                <img [src]="product.photoURL" [alt]="product.name">
-              </div>
-              <h1 class="text-lg font-bold">{{ product.name }}</h1>
-              <p class="truncate">{{ product.description }}</p>
-              <div class="flex items-center gap-4 h-8">
-                <div class="text-sm md:text-lg font-bold grid content-center bg-base-200 px-2 md:px-4 h-full rounded-full">$ {{ product.price }}</div>
-                <div class="text-sm md:text-lg bg-slate-200 hover:bg-base-300 grid content-center px-2 md:px-4 h-full rounded-full cursor-pointer transition-all" (click)="addToCart(product)">
-                  <i class="fa-solid fa-cart-plus"></i>
-                </div>
-              </div>
-            </div>
-          }
-        </div>
+        <app-product-list [products]="state.products" (onAddToCart)="addToCart($event)"/>
       </div>
     </div>
   </section>

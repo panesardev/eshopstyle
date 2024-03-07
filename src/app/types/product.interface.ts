@@ -22,7 +22,7 @@ export function filterByPrice(products: Product[], filter: PriceFilter) {
 	switch(filter) {
 		case 'HIGH_TO_LOW': return products.sort((a, b) => b.price - a.price);
 		case 'LOW_TO_HIGH': return products.sort((a, b) => a.price - b.price);;
-		case 'NONE': return products;
+		case 'NONE': return products.sort();
 	}
 }
 

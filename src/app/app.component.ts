@@ -17,7 +17,7 @@ import { ModalComponent } from './layout/modal.component';
     <app-modal/>
     <app-navbar/>
     <main class="max-w-[1920px] mx-auto mt-20 p-4 md:p-8">
-      <router-outlet/>
+      <router-outlet />
     </main>
     <app-footer/>
   `,

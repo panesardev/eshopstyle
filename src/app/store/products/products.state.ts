@@ -32,12 +32,18 @@ export class ProductsState {
 
   @Action(SetPriceFilter)
   setPriceFilter(ctx: StateContext<ProductsStateType>, action: SetPriceFilter) {
-    return this.productsService.products$.pipe(
-      tap(products => ctx.patchState({ 
-        products: filterByPrice(products, action.filter),
+    if (action.filter === 'NONE') {
+      ctx.patchState({ 
+        products: ctx.getState().products,
         priceFilter: action.filter,
-      })),
-    );
+      });
+    }
+    else {
+      ctx.patchState({ 
+        products: filterByPrice(ctx.getState().products, action.filter),
+        priceFilter: action.filter,
+      });
+    }
   }
   
   @Action(SetCategoryFilter)
@@ -47,6 +53,7 @@ export class ProductsState {
         products: filterByCategory(products, action.filter),
         categoryFilter: action.filter,
       })),
+      tap(() => ctx.dispatch(new SetPriceFilter('NONE'))),
     );
   }
 
