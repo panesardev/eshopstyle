@@ -6,6 +6,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { Observable, map, of, switchMap, tap } from 'rxjs';
 import { Credentials, OAuthProviderName, getAuthProvider } from '../types/auth.interface';
 import { User, UserData, newUserData } from '../types/user.interface';
+import { User as AuthUser } from '@angular/fire/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
   private toast = inject(HotToastService);
 
   readonly user$ = authState(this.auth).pipe(
-    switchMap(user => user ? this.getUser(user) : of(null)),
+    switchMap((user: AuthUser) => user ? this.getUser(user) : of(null)),
   );
 
   readonly isAuthenticated$ = this.user$.pipe(
@@ -64,9 +65,9 @@ export class AuthService {
   }
 
   async resetPassword({ email }: Credentials): Promise<void> {
-    if (!email) 
+    if (!email) {
       throw Error('Email required');
-    
+    }
     await sendPasswordResetEmail(this.auth, email);
     this.toast.success('Password reset email sent');
   }
@@ -77,11 +78,11 @@ export class AuthService {
     this.toast.success('You have been logged out!');
   }
   
-  async setUser(user: User, data: UserData): Promise<void> {
+  async setUser(user: AuthUser, data: UserData): Promise<void> {
     await setDoc(doc(this.firestore, `users/${user.uid}`), data);
   }
 
-  getUser(user: User): Observable<User> {
+  getUser(user: AuthUser): Observable<User> {
     return docData(doc(this.firestore, `users/${user.uid}`)).pipe(
       map((data: UserData) => ({ ...user, ...data }))
     );

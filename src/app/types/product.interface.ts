@@ -9,12 +9,6 @@ export interface Product {
 
 export type Category = 'MEN' | 'WOMEN' | 'ELECTRONICS' | 'JEWELRY';
 
-export interface ProductsStateType {
-  products: Product[];
-  categoryFilter: CategoryFilter;
-  priceFilter: PriceFilter;
-}
-
 export type PriceFilter = 'LOW_TO_HIGH' | 'HIGH_TO_LOW' | 'NONE';
 export type CategoryFilter = 'MEN' | 'WOMEN' | 'ELECTRONICS' | 'JEWELRY' | 'NONE';
 

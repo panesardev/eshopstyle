@@ -1,10 +1,9 @@
 import { Component, inject, input } from '@angular/core';
-import { ProductsService } from '../../../services/products.service';
-import { computedAsync } from 'ngxtension/computed-async';
 import { Store } from '@ngxs/store';
-import { Product } from '../../../types/product.interface';
+import { computedAsync } from 'ngxtension/computed-async';
+import { ProductsService } from '../../../services/products.service';
 import { AddProduct } from '../../../store/cart/cart.actions';
-import { map } from 'rxjs';
+import { Product } from '../../../types/product.interface';
 
 @Component({
   selector: 'app-product',

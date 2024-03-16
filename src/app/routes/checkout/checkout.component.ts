@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { computedAsync } from 'ngxtension/computed-async';
-import { CartStateType } from '../../types/cart.interface';
+import { CartStateType } from '../../store/cart/cart.state';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Product } from '../../types/product.interface';

@@ -1,15 +1,10 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { ApplicationConfig } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
-import { NgxsModule } from "@ngxs/store";
-import { FIREBASE_CONFIG } from './app.constants';
 import { routes } from './app.routes';
-import { CartState } from "./store/cart/cart.state";
-import { ProductsState } from './store/products/products.state';
+import { provideFirebase } from './providers/firebase.provider';
+import { provideNgxs } from './providers/ngxs.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,11 +18,7 @@ export const appConfig: ApplicationConfig = {
     ), 
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(FIREBASE_CONFIG)),
-      provideFirestore(() => getFirestore()),
-      provideAuth(() => getAuth()),
-      NgxsModule.forRoot([CartState, ProductsState]),
-    ),
+    provideFirebase(),
+    provideNgxs(),
   ]
 };

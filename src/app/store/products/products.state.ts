@@ -2,8 +2,14 @@ import { Injectable, inject } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { ProductsService } from "../../services/products.service";
-import { ProductsStateType, filterByCategory, filterByPrice } from "../../types/product.interface";
+import { CategoryFilter, PriceFilter, Product, filterByCategory, filterByPrice } from "../../types/product.interface";
 import { ClearFilters, GetProducts, SetCategoryFilter, SetPriceFilter } from "./products.actions";
+
+export interface ProductsStateType {
+  products: Product[];
+  categoryFilter: CategoryFilter;
+  priceFilter: PriceFilter;
+}
 
 const initialState: ProductsStateType = {
   products: [],

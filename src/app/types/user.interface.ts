@@ -1,12 +1,15 @@
-import { User as FirebaseUser } from '@firebase/auth';
+import { Product } from './product.interface';
 
-export interface User extends FirebaseUser, UserData {}
+export interface User extends UserData {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL: string;
+}
 
 export interface UserData {
-  saved?: string[];
-  isPro?: boolean;
+  products: Product[];
 }
 export const newUserData: UserData = {
-  isPro: false,
-  saved: [],
+  products: [] as Product[],
 }

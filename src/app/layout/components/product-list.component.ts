@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
-import { Product } from '../../types/product.interface';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Product } from '../../types/product.interface';
 
 @Component({
   selector: 'app-product-list',
@@ -32,6 +32,5 @@ import { RouterLink } from '@angular/router';
 })
 export class ProductListComponent {
   products = input.required<Product[]>();
-
-  @Output() onAddToCart = new EventEmitter<Product>();
+  onAddToCart = output<Product>();
 }

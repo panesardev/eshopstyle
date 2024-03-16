@@ -3,9 +3,10 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { computedAsync } from 'ngxtension/computed-async';
 import { AddProduct } from '../../store/cart/cart.actions';
-import { CategoryFilter, PriceFilter, Product, ProductsStateType } from '../../types/product.interface';
+import { CategoryFilter, PriceFilter, Product } from '../../types/product.interface';
 import { SetCategoryFilter, SetPriceFilter } from '../../store/products/products.actions';
 import { ProductListComponent } from '../../layout/components/product-list.component';
+import { ProductsStateType } from '../../store/products/products.state';
 
 @Component({
   selector: 'app-products',

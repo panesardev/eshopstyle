@@ -2,8 +2,15 @@ import { isPlatformBrowser } from "@angular/common";
 import { Injectable, PLATFORM_ID, inject } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
 import { TAX } from "../../app.constants";
-import { CartStateType, CartItem } from "../../types/cart.interface";
+import { CartItem } from "../../types/cart.interface";
 import { AddProduct, ComputePrice, ComputeQuantity, RemoveProduct, ResetCart, SaveCart } from "./cart.actions";
+
+export interface CartStateType {
+  subtotal: number;
+  total: number;
+  items: CartItem[];
+  quantity: number;
+}
 
 const initialState: CartStateType = {
   items: [],

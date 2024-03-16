@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { computedAsync } from 'ngxtension/computed-async';
-import { CartStateType } from '../../types/cart.interface';
+import { CartStateType } from '../../store/cart/cart.state';
 import { Modal } from '../../types/modal.class';
 import { BaseModalComponent } from './base-modal.component';
 import { RouterLink } from '@angular/router';
