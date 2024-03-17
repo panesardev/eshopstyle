@@ -16,7 +16,7 @@ export class AuthService {
   private toast = inject(HotToastService);
 
   readonly user$ = authState(this.auth).pipe(
-    switchMap((user: AuthUser) => user ? this.getUser(user) : of(null)),
+    switchMap((user) => user ? this.getUser(user) : of(null)),
   );
 
   readonly isAuthenticated$ = this.user$.pipe(
@@ -35,7 +35,7 @@ export class AuthService {
     
     await Promise.all([
       updateProfile(credential.user, { displayName }),
-      this.setUser(credential.user, newUserData),
+      this.setUser(credential.user.uid, newUserData),
     ]);
 
     await this.router.navigateByUrl('/dashboard');
@@ -48,7 +48,7 @@ export class AuthService {
     }
     const credential = await signInWithEmailAndPassword(this.auth, email, password);
 
-    await this.router.navigateByUrl('/dashboard');
+    await this.router.navigateByUrl('/profile');
     this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
@@ -57,10 +57,10 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
-      await this.setUser(credential.user, newUserData);
+      await this.setUser(credential.user.uid, newUserData);
     }
 
-    await this.router.navigateByUrl('/dashboard');
+    await this.router.navigateByUrl('/profile');
     this.toast.success(`Welcome ${credential.user.displayName}`);
   }
 
@@ -78,8 +78,8 @@ export class AuthService {
     this.toast.success('You have been logged out!');
   }
   
-  async setUser(user: AuthUser, data: UserData): Promise<void> {
-    await setDoc(doc(this.firestore, `users/${user.uid}`), data);
+  async setUser(uid: string, data: UserData): Promise<void> {
+    await setDoc(doc(this.firestore, `users/${uid}`), data);
   }
 
   getUser(user: AuthUser): Observable<User> {

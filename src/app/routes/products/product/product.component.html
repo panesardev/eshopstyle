@@ -7,13 +7,19 @@
       <div>
         <h1 class="text-3xl md:text-6xl text-primary font-bold mb-4">{{ product.name }}</h1>
         <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
-        <div class="mb-6">
+        <div class="flex gap-6 mb-6">
+          <span class="bg-base-100 text-primary px-6 py-2 rounded-full custom-shadow">$ {{ product.price }}</span>
           <span class="bg-base-100 text-primary px-6 py-2 rounded-full custom-shadow">{{ product.category }}</span>
         </div>
         <p class="md:text-xl mb-10">{{ product.description }}</p>
         <div class="flex items-center gap-6 md:gap-8">
-          <span class="bg-base-100 text-primary px-6 py-3 rounded-full custom-shadow">$ {{ product.price }}</span>
           <button (click)="addToCart(product)" class="bg-primary text-white px-8 py-3 rounded-full">Add to cart</button>
+          @if (isProductSaved()) {
+            <button (click)="removeSavedProduct(product)" class="border-2 border-red-500 bg-red-100 text-red-500 px-8 py-3 rounded-full">Remove saved</button>
+          }
+          @else {
+            <button (click)="saveProduct(product)" class="bg-primary text-white px-8 py-3 rounded-full">Save</button>
+          }
         </div>
       </div>
     </div>

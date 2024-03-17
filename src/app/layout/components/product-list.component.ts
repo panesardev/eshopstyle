@@ -11,7 +11,7 @@ import { Product } from '../../types/product.interface';
   template: `
     <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-8">
       @for (product of products(); track product.id) {
-        <div class="bg-white grid gap-4 md:gap-6 h-fit p-4 md:p-6">
+        <div class="bg-white grid gap-4 md:gap-6 h-fit p-4 md:p-6 border-2 border-base-100">
           <div routerLink="/products/{{ product.id }}" class="cursor-pointer">
             <img [src]="product.photoURL" [alt]="product.name">
           </div>
