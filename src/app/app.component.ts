@@ -43,5 +43,4 @@ export class AppComponent {
     this.actions$.pipe(ofActionSuccessful(RemoveSavedProduct))
       .subscribe(action => this.toast.success(`${action.product.name} removed from your profile!`));
   }
-
 }
