@@ -62,7 +62,6 @@ section {
   }
 }
 
-
 // loading
 .loading {
   width: 64px;
@@ -86,4 +85,10 @@ section {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }

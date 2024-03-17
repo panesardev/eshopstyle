@@ -5,7 +5,9 @@
         <img [src]="product.photoURL" [alt]="product.name">
       </div>
       <div>
-        <h1 class="text-3xl md:text-6xl text-primary font-bold mb-4">{{ product.name }}</h1>
+        <div class="text-5xl md:text-7xl mb-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+          <span>{{ product.name }}</span>
+        </div>
         <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
         <div class="flex gap-6 mb-6">
           <span class="bg-base-100 text-primary px-6 py-2 rounded-full custom-shadow">$ {{ product.price }}</span>
