@@ -1,10 +1,10 @@
-import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { UserData } from "../../types/user.interface";
-import { Product } from "../../types/product.interface";
-import { GetUserProducts, RemoveSavedProduct, SaveProduct, SetUserProducts } from "./user.actions";
 import { inject } from "@angular/core";
-import { UserService } from '../../services/user.service';
+import { Action, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
+import { UserService } from '../../services/user.service';
+import { Product } from "../../types/product.interface";
+import { UserData } from "../../types/user.interface";
+import { GetUserProducts, RemoveSavedProduct, SaveProduct, SetUserProducts } from "./user.actions";
 
 export type UserStateType = UserData;
 
@@ -23,11 +23,6 @@ export class UserState {
     ctx.dispatch(new GetUserProducts());
   }
   
-  @Selector()
-  static isProductSaved(state: UserStateType) {
-    return (productId: string) => state.products.find(p => p.id === productId) ? true : false; 
-  }
-
   @Action(GetUserProducts)
   getUserProducts(ctx: StateContext<UserStateType>) {
     return this.userService.getUserProducts().pipe(
