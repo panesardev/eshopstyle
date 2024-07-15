@@ -9,3 +9,9 @@ export interface AdditionalUserData {
 }
 
 export type OAuthProviderName = 'google' | 'github';
+
+export interface Credentials {
+  displayName?: string;
+  email?: string;
+  password?: string;
+}

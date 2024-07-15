@@ -1,0 +1,128 @@
+<section>
+	<div class="text-5xl md:text-7xl mb-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+		<span>Checkout</span>
+	</div>
+  <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
+
+  @if (cart(); as cart) {
+    <div class="grid xl:grid-cols-[2fr_1fr] gap-8 max-w-7xl mx-auto">
+      <div>
+        <div class="grid gap-4 border-2 border-base-300 border-dashed p-4 mb-6 md:mb-8">
+          <h1 class="font-bold text-lg">
+            <span class="float-right font-normal">Total {{ cart.quantity }} items</span>
+            <span>Shopping Cart</span>
+          </h1>
+          @for (item of cart.items; track item.price) {
+            <div class="bg-white flex flex-col md:flex-row justify-between md:items-center gap-4 p-4">
+              <div class="flex gap-4">
+                <div class="w-16 cursor-pointer" routerLink="/products/{{ item.product.id }}">
+                  <img [src]="item.product.photoURL" alt="product_img">
+                </div>
+                <div routerLink="/products/{{ item.product.id }}">
+                  <h1 class="text-lg font-bold">{{ item.product.name }}</h1>
+                  <p class="truncate w-[20ch] md:w-[30ch]">{{ item.product.description }}</p>
+                </div>
+              </div>
+              <div class="flex justify-between md:justify-start gap-6">
+                <div class="bg-base-200 w-fit px-3 py-1 rounded-full">{{ '$ ' + item.product.price.toFixed(2) }}</div>
+                <div class="flex justify-center items-center gap-4">
+                  <span class="border-slate-200 hover:bg-slate-100 border-2 px-3 py-1 cursor-pointer" (click)="removeProduct(item.product)">-</span>
+                  <span class="border-slate-200 bg-slate-100 border-2 w-12 py-1 text-center">{{ item.quantity }}</span>
+                  <span class="border-slate-200 hover:bg-slate-100 border-2 px-3 py-1 cursor-pointer" (click)="addProduct(item.product)">+</span>
+                </div>
+              </div>
+            </div>
+          }
+          <div>
+            <a routerLink="/products" class="text-primary hover:underline">Browse more products</a>
+          </div>
+        </div>
+
+        <div class="grid gap-4 bg-base-100 p-6 h-fit">
+          <h1 class="text-xl font-bold">Order Summary</h1>
+          <div class="flex justify-between items-center gap-4">
+            <span>Your subtotal</span>
+            <span>$ {{ cart.subtotal.toFixed(2) }}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4">
+            <span>Taxes (13%)</span>
+            <span>$ {{ (cart.subtotal * TAX).toFixed(2) }}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4">
+            <span>Estimated shipping</span>
+            <span class="font-bold text-green-500">FREE</span>
+          </div>
+          <div class="border-[1px] border-base-300"></div>
+          <div class="flex justify-between items-center gap-4 font-bold">
+            <span>Total Cost</span>
+            <span>$ {{ cart.total.toFixed(2) }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <div class="">
+          <h1 class="font-bold text-2xl text-primary mb-4">Your details</h1>
+          <div class="grid gap-4">
+            <div class="grid gap-2">
+              <label for="email">Enter email</label>
+              <input type="email" name="email" placeholder="john.wick@example.com" [(ngModel)]="email"
+                class="{{ emailError && 'border-red-500 border-2' }} px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+            </div>
+            <div class="grid gap-2">
+              <label for="email">Enter full name</label>
+              <input type="email" name="email" placeholder="john.wick@example.com" [(ngModel)]="displayName"
+                class="{{ emailError && 'border-red-500 border-2' }} px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+            </div>
+            @if (!showStep2) {
+              <div>
+                <button class="bg-primary text-white py-3 w-full" (click)="continueFromEmail()">Continue</button>
+              </div>
+            }
+
+            @if (showStep2) {
+              <div class="grid gap-2">
+                <label for="email">Enter Address</label>
+                <input type="email" name="email" placeholder="435 King Street" [(ngModel)]="address"
+                  class="px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+              </div>
+              <div class="grid gap-2">
+                <label for="email">Enter City</label>
+                <input type="email" name="email" placeholder="Toronto" [(ngModel)]="city"
+                  class="px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+              </div>
+              <div class="grid grid-cols-2 xl:grid-cols-1 gap-3">
+                <div class="grid gap-2">
+                  <label for="email">Enter Province</label>
+                  <input type="email" name="email" placeholder="ON" [(ngModel)]="province"
+                    class="px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+                </div>
+                <div class="grid gap-2">
+                  <label for="email">Enter Country</label>
+                  <input type="email" name="email" placeholder="Canada" [(ngModel)]="country"
+                    class="px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+                </div>
+              </div>
+              <div class="grid gap-2">
+                <label for="email">Enter postal code</label>
+                <input type="email" name="email" placeholder="A1B 2C3" [(ngModel)]="postalCode"
+                  class="px-5 py-3 rounded placeholder:text-primary placeholder:opacity-40">
+              </div>
+              <div>
+                <button class="bg-primary text-white py-3 w-full" (click)="placeOrder()">Place Order</button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  @else {
+    <div class="text-center text-xl">
+      <p>Cart is empty!</p>
+      <a routerLink="/products" class="text-primary hover:underline">Browse products</a>
+    </div>
+  }
+</section>
+
+

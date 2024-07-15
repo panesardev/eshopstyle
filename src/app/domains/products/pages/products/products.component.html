@@ -1,0 +1,40 @@
+@if (state(); as state) {
+  <section>
+    <div class="text-5xl md:text-7xl mb-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+      <span>New Arrivals</span>
+    </div>
+    <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
+  
+    <div class="grid md:grid-cols-[1fr_5fr] gap-8">
+      <div  class="md:sticky md:top-32 grid gap-4 h-fit">
+        <h1 class="font-bold text-2xl">Categories</h1>
+
+        <div class="grid">
+          <span class="filter {{ isActiveCategoryFilter('NONE') && 'active' }}" (click)="setCategoryFilter('NONE')">Show all</span>
+          <span class="filter {{ isActiveCategoryFilter('MEN') && 'active' }}" (click)="setCategoryFilter('MEN')">Men</span>
+          <span class="filter {{ isActiveCategoryFilter('WOMEN') && 'active' }}" (click)="setCategoryFilter('WOMEN')">Women</span>
+          <span class="filter {{ isActiveCategoryFilter('JEWELRY') && 'active' }}" (click)="setCategoryFilter('JEWELRY')">Jewelry</span>
+          <span class="filter {{ isActiveCategoryFilter('ELECTRONICS') && 'active' }}" (click)="setCategoryFilter('ELECTRONICS')">Electronics</span>
+        </div>
+
+        <h1 class="font-bold text-2xl">Filter</h1>
+  
+        <div class="grid">
+          <span class="filter {{ isActivePriceFilter('NONE') && 'active' }}" (click)="setPriceFilter('NONE')">Price: Default</span>
+          <span class="filter {{ isActivePriceFilter('HIGH_TO_LOW') && 'active' }}" (click)="setPriceFilter('HIGH_TO_LOW')">Price: High To Low</span>
+          <span class="filter {{ isActivePriceFilter('LOW_TO_HIGH') && 'active' }}" (click)="setPriceFilter('LOW_TO_HIGH')">Price: Low To High</span>
+        </div>
+      </div>
+      <div>
+        <h1 class="text-lg font-bold mb-8">Showing {{ state.products.length }} results</h1>
+  
+        <app-product-list [products]="state.products" (onAddToCart)="addToCart($event)"/>
+      </div>
+    </div>
+  </section>
+}
+@else {
+  <div class="flex justify-center items-center h-96">
+    <div class="loading"></div>
+  </div>
+}

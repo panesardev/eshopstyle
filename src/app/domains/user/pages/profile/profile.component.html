@@ -1,0 +1,27 @@
+@if (user(); as user) {
+  <section>
+    <div class="text-5xl md:text-7xl mb-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+      <span>Hello {{ user.displayName }}</span>
+    </div>
+    <div class="h-0 border-2 border-base-300 rounded-full mb-6 md:mb-8"></div>
+  
+    <div class="grid md:grid-cols-[1fr_5fr] gap-8">
+      <div class="sticky top-32 bg-white grid gap-6 p-6 h-fit">
+        <div>
+          <img [src]="user.photoURL" [alt]="user.displayName" class="w-20 h-20 rounded-full mx-auto">
+        </div>
+        <div>
+          <p>Logged in as </p>
+          <p class="font-bold">{{ user.email }}</p>
+        </div>
+        <div>
+          <button class="bg-primary text-base-100 w-full px-6 py-2 rounded" (click)="openLogout()">Logout</button>
+        </div>
+      </div>
+      <div class="bg-white grid gap-6 p-6 h-fit">
+        <p class="text-xl border-b-2 border-base-100 pb-2">Your saved products</p>
+        <app-product-list [products]="user.products"/>
+      </div>
+    </div>
+  </section>
+}

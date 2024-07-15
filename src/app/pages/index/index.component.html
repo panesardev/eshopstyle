@@ -1,1 +1,80 @@
-<p>index works!</p>
+<section>
+  <div class="grid gap-4 md:gap-8">
+    <div class="slider h-[300px] md:h-[500px]">
+      <img class="absolute z-5" [src]="images[currentImageIndex()]">
+      <div class="absolute z-10 top-[100px] md:top-[50%] left-[50%] md:left-[100px] translate-y-[-50%] translate-x-[-50%] md:translate-x-[0%] bg-gradient-to-r from-base-300 to-base-200 p-6">
+        <div routerLink="/products" class="text-2xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+          <p>Shop Unique</p> 
+          <p>Modern Style</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div>
+        <img src="/img/men-1.jpg" alt="men">
+      </div>
+      <div class="bg-gradient-to-b from-base-300 p-4 md:p-8">
+        <p class="text-3xl my-8 pb-8 border-b-2 border-b-base-200">Vast collection of fashionable clothes</p>
+
+        <div class="grid grid-cols-2 mb-16">
+          <div class="text-3xl md:text-6xl text-base-300">Men</div>
+          <div class="text-3xl md:text-6xl text-base-300 text-right">Women</div>
+        </div>
+
+        <button class="bg-base-200 text-primary px-8 py-3 mx-auto" routerLink="/products">View clothes</button>
+      </div>
+      <div>
+        <img class="h-full w-auto" src="/img/women-1.jpg" alt="women">
+      </div>
+    </div>
+
+    @if (featuredMen(); as men) {
+      <div class="grid md:grid-cols-[3fr_1fr_1fr] gap-8">
+        <div class="bg-base-200 p-8">
+          <div class="text-3xl md:text-6xl text-right mb-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+            <span>Shop Men</span>
+          </div>
+          <div class="grid gap-8">
+            <div class="text-right font-bold text-xl">
+              <a routerLink="/products/{{ men[0].id }}">{{ men[0].name }}</a>
+            </div>
+            <div class="text-right font-bold text-xl">
+              <a routerLink="/products/{{ men[1].id }}">{{ men[1].name }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="bg-base-100 p-8 flex items-center">
+          <img class="h-fit cursor-pointer" routerLink="/products/{{ men[0].id }}" [src]="men[0].photoURL" [alt]="men[0].name">
+        </div>
+        <div class="bg-base-100 p-8">
+          <img class="cursor-pointer" routerLink="/products/{{ men[1].id }}" [src]="men[1].photoURL" [alt]="men[1].name">
+        </div>
+      </div>
+    }
+    
+    @if (featuredWomen(); as women) {
+      <div class="grid md:grid-cols-[1fr_1fr_3fr] gap-8">
+        <div class="bg-base-100 p-8">
+          <img class="h-fit cursor-pointer" routerLink="/products/{{ women[0].id }}" [src]="women[0].photoURL" [alt]="women[0].name">
+        </div>
+        <div class="bg-base-100 p-8 flex items-center">
+          <img class="cursor-pointer" routerLink="/products/{{ women[1].id }}" [src]="women[1].photoURL" [alt]="women[1].name">
+        </div>
+        <div class="bg-base-200 p-8">
+          <div class="text-3xl md:text-6xl mb-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary">
+            <span>Shop Women</span>
+          </div>
+          <div class="grid gap-8">
+            <div class="font-bold text-xl">
+              <a routerLink="/products/{{ women[0].id }}">{{ women[0].name }}</a>
+            </div>
+            <div class="font-bold text-xl">
+              <a routerLink="/products/{{ women[1].id }}">{{ women[1].name }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

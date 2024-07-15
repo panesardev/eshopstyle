@@ -1,6 +1,6 @@
-import { inject } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
-import { tap } from "rxjs";
+import { take, tap } from "rxjs";
 import { GetUserProducts, RemoveSavedProduct, SaveProduct, SetUserProducts } from "./user.actions";
 import { initialUserState } from "./user.utilities";
 import { UserService } from "./user.service";
@@ -10,6 +10,7 @@ import { UserStateType } from "./user.interface";
   name: 'user',
   defaults: initialUserState(),
 })
+@Injectable()
 export class UserState {
   private userService = inject(UserService);
 
@@ -20,6 +21,7 @@ export class UserState {
   @Action(GetUserProducts)
   getUserProducts(ctx: StateContext<UserStateType>) {
     return this.userService.products$.pipe(
+      take(1),
       tap(products => ctx.setState({ products })),
     );
   }

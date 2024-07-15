@@ -5,7 +5,7 @@ import { user as userChanges } from 'rxfire/auth';
 import { docData as docChanges } from 'rxfire/firestore';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { Auth, Firestore } from '../app.firebase';
-import { AdditionalUserData, AuthUser, OAuthProviderName } from './auth.interface';
+import { AdditionalUserData, AuthUser, Credentials, OAuthProviderName } from './auth.interface';
 import { createUserData, getAuthProvider } from './auth.utilities';
 
 @Injectable({ providedIn: 'root' })
@@ -24,7 +24,7 @@ export class AuthService {
     }),
   );
 
-  async createAccount(email: string, password: string, displayName: string): Promise<void> {
+  async createAccount({ email, password, displayName }: Credentials): Promise<void> {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([
       updateProfile(credential.user, { displayName }), 
@@ -32,7 +32,7 @@ export class AuthService {
     ]);
   }
 
-  async login(email: string, password: string): Promise<void> {
+  async login({ email, password }: Credentials): Promise<void> {
     await signInWithEmailAndPassword(this.auth, email, password);
   }
 
@@ -45,7 +45,7 @@ export class AuthService {
     }
   }
 
-  async resetPassword(email: string): Promise<void> {
+  async resetPassword({ email }: Credentials): Promise<void> {
     await sendPasswordResetEmail(this.auth, email);
   }
 

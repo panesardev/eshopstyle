@@ -2,9 +2,9 @@ import { Injectable, inject } from "@angular/core";
 import { Action, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs";
 import { ClearFilters, GetProducts, SetCategoryFilter, SetPriceFilter } from "./products.actions";
-import { initialProductsState, filterByCategory, filterByPrice } from "./products.utilities";
-import { ProductsService } from "./products.service";
 import { ProductsStateType } from "./products.interface";
+import { ProductsService } from "./products.service";
+import { filterByCategory, filterByPrice, initialProductsState } from "./products.utilities";
 
 @State({
   name: 'products',
@@ -48,7 +48,6 @@ export class ProductsState {
         products: filterByCategory(products, action.filter),
         categoryFilter: action.filter,
       })),
-      tap(() => ctx.dispatch(new SetPriceFilter('NONE'))),
     );
   }
 
