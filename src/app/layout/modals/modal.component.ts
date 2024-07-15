@@ -7,7 +7,7 @@ import { Modal } from './modal.class';
   imports: [],
   template: `
     <div class="{{ modal.isOpen() ? 'modal-overlay-open' : 'modal-overlay-close' }} fixed inset-0 z-[100] bg-slate-950/60"></div>
-    <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0 px-3 md:px-10 py-8" #modalRef (click)="close($event)">
+    <div class="{{ modal.isOpen() ? 'modal-open' : 'modal-close' }} fixed z-[101] inset-0" #modalRef (click)="close($event)">
       <div class="bg-base-200 p-4 md:p-8 {{ classes() }}">
         <ng-content />
       </div>
