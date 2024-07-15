@@ -7,11 +7,13 @@ import { CartItemComponent } from '../../../domains/cart/components/cart-item.co
 import { Product } from '../../../domains/products/products.interface';
 import { Modal } from '../modal.class';
 import { ModalComponent } from '../modal.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [
+    RouterLink,
     ModalComponent,
     CartItemComponent,
   ],
