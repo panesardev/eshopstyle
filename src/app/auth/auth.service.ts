@@ -28,7 +28,7 @@ export class AuthService {
     const credential = await createUserWithEmailAndPassword(this.auth, email, password);
     await Promise.all([
       updateProfile(credential.user, { displayName }), 
-      this.setUserData(credential.user.uid, createUserData()),
+      this.setUserDoc(credential.user.uid, createUserData()),
     ]);
   }
 
@@ -41,7 +41,7 @@ export class AuthService {
     const credential = await signInWithPopup(this.auth, provider);
 
     if (getAdditionalUserInfo(credential).isNewUser) {
-      await this.setUserData(credential.user.uid, createUserData());
+      await this.setUserDoc(credential.user.uid, createUserData());
     }
   }
 
@@ -53,7 +53,7 @@ export class AuthService {
     await signOut(this.auth);
   }
   
-  async setUserData(uid: string, data: AdditionalUserData): Promise<void> {
+  async setUserDoc(uid: string, data: AdditionalUserData): Promise<void> {
     await setDoc(doc(this.firestore, `users/${uid}`), data);
   }
 }

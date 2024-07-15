@@ -4,6 +4,7 @@ import { AdditionalUserData, OAuthProviderName } from "./auth.interface";
 export function createUserData(): AdditionalUserData {
   return {
     created: new Date().toDateString(),
+    products: [],
   };
 }
 

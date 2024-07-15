@@ -1,39 +1,36 @@
 .modal-open {
-  animation: modal-open 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: translateY(0px);
-  opacity: 1;
+  animation: modal-open 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(0%);
 }
 
 @keyframes modal-open {
   from {
-    transform: translateY(50px);
-    opacity: 0;
+    transform: translateX(15px);
   }
   to {
-    transform: translateY(0px);
-    opacity: 1;
+    transform: translateX(0%);
   }
 }
 
 .modal-close {
-  animation: modal-close 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
-  transform: translateY(50px);
+  animation: modal-close 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(2%);
   opacity: 0;
 }
 
 @keyframes modal-close {
   from {
-    transform: translateY(0px);
+    transform: translateX(0%);
     opacity: 1;
   }
   to {
-    transform: translateY(50px);
+    transform: translateX(15px);
     opacity: 0;
   }
 }
 
 .modal-overlay-open {
-  animation: modal-overlay-open 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: modal-overlay-open 300ms;
   opacity: 1;
 }
 
@@ -47,7 +44,7 @@
 }
 
 .modal-overlay-close {
-  animation: modal-overlay-close 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: modal-overlay-close 450ms;
   opacity: 0;
 }
 

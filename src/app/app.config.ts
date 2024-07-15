@@ -1,8 +1,10 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { PreloadAllModules, provideRouter, withComponentInputBinding, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { NgxsModule } from '@ngxs/store';
 import { routes } from './app.routes';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +18,13 @@ export const appConfig: ApplicationConfig = {
     ), 
     provideClientHydration(),
     provideHttpClient(withFetch()),
+    importProvidersFrom(
+      NgxsModule.forRoot([
+        // CartState, 
+        // ProductsState, 
+        // UserState,
+      ]),
+      NgxsLoggerPluginModule.forRoot(),
+    ),
   ],
 };
