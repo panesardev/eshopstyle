@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './animations.scss';
+@import './fonts.scss';
+@import './components.scss';
+
+* {
+  outline: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: all 200ms ease-in-out;
+  letter-spacing: 1px;
+
+  &:hover {
+    opacity: 90%;
+  }
+}
+
+.custom-shadow {
+  box-shadow: 0 0 25px theme('colors.base-200');
+}
+
+a {
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: theme('colors.base-100');
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: theme('colors.base-300');
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  opacity: 90%;
+}

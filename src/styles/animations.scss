@@ -1,0 +1,94 @@
+section {
+  animation: modal-in 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(0%);
+}
+
+.modal-in {
+  animation: modal-in 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(0%);
+}
+
+@keyframes modal-in {
+  from {
+    transform: translateX(15px);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.modal-out {
+  animation: modal-out 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(2%);
+  opacity: 0;
+}
+
+@keyframes modal-out {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(15px);
+    opacity: 0;
+  }
+}
+
+.modal-overlay-in {
+  animation: modal-overlay-in 300ms;
+  opacity: 1;
+}
+
+@keyframes modal-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-overlay-out {
+  animation: modal-overlay-out 450ms;
+  opacity: 0;
+}
+
+@keyframes modal-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// loading
+.loading {
+  width: 64px;
+  height: 64px;
+}
+.loading:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid theme('colors.primary');
+  border-color: theme('colors.primary') transparent theme('colors.primary') transparent;
+  animation: loading 1.2s linear infinite;
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}

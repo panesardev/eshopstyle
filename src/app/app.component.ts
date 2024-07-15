@@ -14,13 +14,13 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     RenderModalComponent,
   ],
   template: `
-    <app-navbar class="select-none"/>
-    <main>
-      <router-outlet/>
+    <app-navbar />
+    <main class="max-w-[1920px] mx-auto mt-20 p-4 md:p-8">
+      <router-outlet />
     </main>
     @defer {
-      <app-footer class="select-none"/>
-      <app-render-modal/>
+      <app-footer />
+      <app-render-modal />
     }
   `,
 })

@@ -1,0 +1,9 @@
+@layer components {
+  .filter {
+    @apply border-l-4 border-base-200 py-2 transition-all cursor-pointer;
+
+    &:hover, &.active{
+      @apply bg-base-100 border-l-primary pl-4;
+    }
+  }
+}
